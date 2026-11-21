@@ -211,6 +211,14 @@
   .chapter-num{ grid-row:span 2; font-family:'Fraunces', serif; font-style:italic; font-weight:300; font-size:2.6rem; line-height:1; color:var(--marigold); min-width:1.2ch; }
   .chapter-text h3{ font-family:'Fraunces', serif; font-weight:500; font-size:1.35rem; line-height:1.2; color:var(--paper); }
   .chapter-text p{ color:rgba(244,231,207,.75); }
+  .note-card{
+    position:relative; border-radius:14px; padding:26px 20px 22px;
+    background:linear-gradient(160deg, rgba(231,163,58,.10), rgba(231,163,58,.02));
+    box-shadow:inset 0 0 0 1px rgba(207,165,76,.45);
+    opacity:0; transform:translateY(16px); transition:opacity .9s ease, transform .9s cubic-bezier(.2,.8,.2,1);
+  }
+  .chapter.in .note-card{ opacity:1; transform:none; }
+  .note-card .chapter-text{ margin-top:0; }
   .story-end{ text-align:center; margin-top:64px; padding:0 22px; font-family:'Fraunces',serif; font-style:italic; font-weight:300; font-size:1.5rem; color:var(--marigold); }
 
   /* ---------------- Celebrations ---------------- */
@@ -320,7 +328,7 @@
   @media (prefers-reduced-motion: reduce){
     *, *::before, *::after{ animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; transition-delay:0s !important; }
     .hero-art img{ transform:none; }
-    .hero-in, .chapter-art{ opacity:1; transform:none; }
+    .hero-in, .chapter-art, .note-card{ opacity:1; transform:none; }
   }
 </style>
 </head>
@@ -366,44 +374,42 @@
   <!-- Story -->
   <section class="story" aria-labelledby="story-h">
     <div class="section-head">
-      <h2 id="story-h">Our story, in scenes</h2>
-      <p>Tap any scene to see it bigger.</p>
+      <h2 id="story-h">Our story</h2>
+      <p>From our first meeting to every single day.</p>
     </div>
     <ol class="chapters" id="chapters">
-      <li class="chapter">
-        <button class="chapter-art" type="button"><img src="img/ch1-scooter.jpg" width="896" height="1200" loading="lazy" alt="Pramod and Shruti riding a scooter past the Gateway of India"></button>
-        <div class="chapter-text"><span class="chapter-num">1</span><h3>Rides through the city</h3><p>Weekend rides past the Gateway, laughing most of the way.</p></div>
-      </li>
-      <li class="chapter">
-        <button class="chapter-art" type="button"><img src="img/ch2-chai.jpg" width="896" height="1200" loading="lazy" alt="Pramod and Shruti sharing cutting chai at a roadside tapri"></button>
-        <div class="chapter-text"><span class="chapter-num">2</span><h3>Cutting chai</h3><p>Two glasses at the tapri, and conversations that ran for hours.</p></div>
-      </li>
-      <li class="chapter">
-        <button class="chapter-art" type="button"><img src="img/ch3-monsoon.jpg" width="896" height="1200" loading="lazy" alt="Pramod and Shruti sharing an umbrella on a rainy street"></button>
-        <div class="chapter-text"><span class="chapter-num">3</span><h3>Monsoon walks</h3><p>One umbrella between us, and neither of us minded the rain.</p></div>
+      <li class="chapter chapter-note">
+        <div class="note-card">
+          <div class="chapter-text"><span class="chapter-num">1</span><h3>Our families introduced us</h3><p>It began with a meeting our families arranged. Soon after, we both said yes to building a future together.</p></div>
+        </div>
       </li>
       <li class="chapter">
         <button class="chapter-art" type="button"><img src="img/ch4-marine-drive.jpg" width="896" height="1200" loading="lazy" alt="Pramod and Shruti sitting on the Marine Drive sea wall at night"></button>
-        <div class="chapter-text"><span class="chapter-num">4</span><h3>Marine Drive nights</h3><p>Sitting by the sea while the city lit up behind us.</p></div>
+        <div class="chapter-text"><span class="chapter-num">2</span><h3>First date at Marine Drive</h3><p>We sat by the sea and talked for hours.</p></div>
+      </li>
+      <li class="chapter chapter-note">
+        <div class="note-card">
+          <div class="chapter-text"><span class="chapter-num">3</span><h3>Dadar Chowpatty</h3><p>Our second date ran three to five hours, and we came home a lot closer. After that we met whenever we could, every week or two.</p></div>
+        </div>
       </li>
       <li class="chapter">
-        <button class="chapter-art" type="button"><img src="img/ch5-proposal.jpg" width="896" height="1200" loading="lazy" alt="Pramod on one knee holding a ring as Shruti reacts with joy"></button>
-        <div class="chapter-text"><span class="chapter-num">5</span><h3>The question</h3><p>A ring, a garden full of lights, and a very happy yes.</p></div>
+        <button class="chapter-art" type="button"><img src="img/ch8-varmala.jpg" width="896" height="1200" loading="lazy" alt="Pramod and Shruti in traditional clothes at a family ceremony"></button>
+        <div class="chapter-text"><span class="chapter-num">4</span><h3>Our tilak ceremony</h3><p>Our families made it official at Shivkamal Lawns, where we held hands and promised each other forever.</p></div>
       </li>
       <li class="chapter">
-        <button class="chapter-art" type="button"><img src="img/ch6-balcony.jpg" width="895" height="1200" loading="lazy" alt="Pramod and Shruti on a carved palace balcony at sunset"></button>
-        <div class="chapter-text"><span class="chapter-num">6</span><h3>Sunsets, side by side</h3><p>Every view got better once we were sharing it.</p></div>
+        <button class="chapter-art" type="button"><img src="img/ch3-monsoon.jpg" width="896" height="1200" loading="lazy" alt="Pramod and Shruti sharing one umbrella in heavy rain"></button>
+        <div class="chapter-text"><span class="chapter-num">5</span><h3>Caught in the rain at Upvan Lake</h3><p>Between shopping trips and café hopping came a scooter ride to Upvan Lake. On the way back from coffee the sky opened up, and we had one umbrella between us.</p></div>
       </li>
       <li class="chapter">
-        <button class="chapter-art" type="button"><img src="img/ch7-dance.jpg" width="896" height="1200" loading="lazy" alt="Shruti twirling in a pink lehenga as Pramod dances with her"></button>
-        <div class="chapter-text"><span class="chapter-num">7</span><h3>Dancing with everyone we love</h3><p>Family, friends, and one very big twirl.</p></div>
+        <button class="chapter-art" type="button"><img src="img/ch1-scooter.jpg" width="896" height="1200" loading="lazy" alt="Pramod and Shruti laughing together on a scooter"></button>
+        <div class="chapter-text"><span class="chapter-num">6</span><h3>Scooter rides became our thing</h3><p>After that rainy ride, the scooter was ours. Every trip on it still feels like a small celebration.</p></div>
       </li>
       <li class="chapter">
-        <button class="chapter-art" type="button"><img src="img/ch8-varmala.jpg" width="896" height="1200" loading="lazy" alt="Pramod and Shruti exchanging flower garlands at the wedding"></button>
-        <div class="chapter-text"><span class="chapter-num">8</span><h3>Garlands and promises</h3><p>The next chapter is the one we want you to be part of.</p></div>
+        <button class="chapter-art" type="button"><img src="img/ch2-chai.jpg" width="896" height="1200" loading="lazy" alt="Pramod and Shruti sharing tea at a roadside stall in the evening"></button>
+        <div class="chapter-text"><span class="chapter-num">7</span><h3>Every single day</h3><p>When Shruti started her new job, Pramod dropped her off on day one on his scooter. Now he picks her up every evening and drops her at the station, with a stop for chai or a snack when we can.</p></div>
       </li>
     </ol>
-    <p class="story-end">And now, we'd love you there.</p>
+    <p class="story-end">From every couple of weeks to every single day.<br>Next comes forever, and we'd love you there.</p>
   </section>
 
   <!-- Celebrations -->
@@ -614,7 +620,7 @@
   new IntersectionObserver(([e]) => { atRsvp = e.isIntersecting; sync(); }, { threshold: 0.15 }).observe($('rsvp'));
 
   // ---- Scene viewer ----
-  const scenes = [...document.querySelectorAll('.chapter')].map(li => ({
+  const scenes = [...document.querySelectorAll('.chapter')].filter(li => li.querySelector('img')).map(li => ({
     src: li.querySelector('img').src, alt: li.querySelector('img').alt,
     num: li.querySelector('.chapter-num').textContent, title: li.querySelector('h3').textContent
   }));
@@ -624,7 +630,7 @@
     const s = scenes[cur];
     $('lbImg').src = s.src; $('lbImg').alt = s.alt;
     $('lbCap').innerHTML = '';
-    const sm = document.createElement('small'); sm.textContent = 'Scene ' + s.num + ' of ' + scenes.length;
+    const sm = document.createElement('small'); sm.textContent = (cur + 1) + ' of ' + scenes.length;
     $('lbCap').append(s.title, sm);
   }
   function openLb(i){ lastFocus = document.activeElement; show(i); lb.classList.add('open'); document.body.classList.add('locked'); $('lbClose').focus(); }
