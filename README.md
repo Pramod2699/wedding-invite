@@ -8,7 +8,7 @@ A digital wedding invitation, built to be shared as a link on WhatsApp.
 
 - A sealed envelope that opens with a petal shower when the guest taps the seal
 - Full-screen illustrated hero with a live countdown to 30 December 2026, 5:45 pm
-- "Our story": seven chapters of how we met, with a swipeable full-screen viewer for the illustrations
+- "Our story" section (currently turned off; commented out in `index.html`)
 - Schedule (Engagement and Haldi on 29 December, Wedding on 30 December) with Add to calendar links
 - Venue card for Shivkamal Lawns with a Google Maps link
 - RSVP form that opens WhatsApp with the reply pre-filled
