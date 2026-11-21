@@ -228,6 +228,9 @@
     box-shadow:inset 0 0 0 1px rgba(207,165,76,.5), inset 0 0 0 10px #2C0D15, inset 0 0 0 11px rgba(207,165,76,.25);
   }
   .placeholder svg{ width:64px; height:64px; opacity:.6; }
+  .finale{ margin-top:64px; }
+  .finale .chapter-art{ box-shadow:0 18px 50px rgba(0,0,0,.55), 0 0 0 1px rgba(231,163,58,.6), 0 0 60px rgba(231,163,58,.18); }
+  .finale .story-end{ margin-top:28px; padding:0; font-size:1.75rem; line-height:1.3; }
   .story-end{ text-align:center; margin-top:64px; padding:0 22px; font-family:'Fraunces',serif; font-style:italic; font-weight:300; font-size:1.5rem; color:var(--marigold); }
 
   /* ---------------- Celebrations ---------------- */
@@ -406,7 +409,10 @@
         <div class="chapter-text"><span class="chapter-num">3</span><h3>Hours that felt like minutes</h3><p>Somewhere between the sunset and the last goodbye, two strangers became each other's favourite person.</p></div>
       </li>
       <li class="chapter">
-        <button class="chapter-art" type="button"><img src="img/ch8-varmala.jpg" width="896" height="1200" loading="lazy" alt="Pramod and Shruti in traditional clothes at a family ceremony"></button>
+        <!-- PICTURE TO ADD: chapter 4, the promise -->
+        <div class="chapter-art placeholder" aria-hidden="true">
+          <svg viewBox="0 0 64 64"><path d="M32 8c6 8 7 14 0 21-7-7-6-13 0-21z" fill="currentColor" opacity=".9"/><path d="M10 34h44c-2 11-11 18-22 18S12 45 10 34z" fill="currentColor" opacity=".55"/><path d="M22 56h20" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".55"/></svg>
+        </div>
         <div class="chapter-text"><span class="chapter-num">4</span><h3>A promise, out loud</h3><p>Hands held, blessings showered, and forever said in front of everyone we love.</p></div>
       </li>
       <li class="chapter">
@@ -422,7 +428,10 @@
         <div class="chapter-text"><span class="chapter-num">7</span><h3>Every single day</h3><p>Once in a while became every evening. Some love stories grow quietly, one cup of chai at a time.</p></div>
       </li>
     </ol>
-    <p class="story-end">From a hello to every single day.<br>Next comes forever, and we'd love you there.</p>
+    <div class="chapter finale">
+      <button class="chapter-art" type="button" data-title="Next comes forever"><img src="img/ch8-varmala.jpg" width="896" height="1200" loading="lazy" alt="Pramod and Shruti exchanging flower garlands at their wedding"></button>
+      <p class="story-end">Next comes forever,<br>and we'd love you there.</p>
+    </div>
   </section>
 
   <!-- Celebrations -->
@@ -633,9 +642,9 @@
   new IntersectionObserver(([e]) => { atRsvp = e.isIntersecting; sync(); }, { threshold: 0.15 }).observe($('rsvp'));
 
   // ---- Scene viewer ----
-  const scenes = [...document.querySelectorAll('.chapter')].filter(li => li.querySelector('img')).map(li => ({
-    src: li.querySelector('img').src, alt: li.querySelector('img').alt,
-    num: li.querySelector('.chapter-num').textContent, title: li.querySelector('h3').textContent
+  const scenes = [...document.querySelectorAll('button.chapter-art')].map(b => ({
+    src: b.querySelector('img').src, alt: b.querySelector('img').alt,
+    title: b.dataset.title || b.closest('.chapter').querySelector('h3').textContent
   }));
   const lb = $('lightbox'); let cur = 0, lastFocus = null;
   function show(i){
