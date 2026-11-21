@@ -219,6 +219,15 @@
   }
   .chapter.in .note-card{ opacity:1; transform:none; }
   .note-card .chapter-text{ margin-top:0; }
+  .placeholder{
+    aspect-ratio:3/4; display:grid; place-items:center; color:var(--gold);
+    background:
+      radial-gradient(circle at 50% 45%, rgba(231,163,58,.14), transparent 60%),
+      repeating-linear-gradient(45deg, rgba(207,165,76,.05) 0 12px, transparent 12px 24px),
+      #2C0D15;
+    box-shadow:inset 0 0 0 1px rgba(207,165,76,.5), inset 0 0 0 10px #2C0D15, inset 0 0 0 11px rgba(207,165,76,.25);
+  }
+  .placeholder svg{ width:64px; height:64px; opacity:.6; }
   .story-end{ text-align:center; margin-top:64px; padding:0 22px; font-family:'Fraunces',serif; font-style:italic; font-weight:300; font-size:1.5rem; color:var(--marigold); }
 
   /* ---------------- Celebrations ---------------- */
@@ -378,38 +387,42 @@
       <p>From our first meeting to every single day.</p>
     </div>
     <ol class="chapters" id="chapters">
-      <li class="chapter chapter-note">
-        <div class="note-card">
-          <div class="chapter-text"><span class="chapter-num">1</span><h3>Our families introduced us</h3><p>It began with a meeting our families arranged. Soon after, we both said yes to building a future together.</p></div>
+      <li class="chapter">
+        <!-- PICTURE TO ADD: chapter 1, families meeting -->
+        <div class="chapter-art placeholder" aria-hidden="true">
+          <svg viewBox="0 0 64 64"><path d="M32 8c6 8 7 14 0 21-7-7-6-13 0-21z" fill="currentColor" opacity=".9"/><path d="M10 34h44c-2 11-11 18-22 18S12 45 10 34z" fill="currentColor" opacity=".55"/><path d="M22 56h20" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".55"/></svg>
         </div>
+        <div class="chapter-text"><span class="chapter-num">1</span><h3>Two families, one hello</h3><p>It began with a hello our families planned, and a yes we chose ourselves.</p></div>
       </li>
       <li class="chapter">
-        <button class="chapter-art" type="button"><img src="img/ch4-marine-drive.jpg" width="896" height="1200" loading="lazy" alt="Pramod and Shruti sitting on the Marine Drive sea wall at night"></button>
-        <div class="chapter-text"><span class="chapter-num">2</span><h3>First date at Marine Drive</h3><p>We sat by the sea and talked for hours.</p></div>
+        <button class="chapter-art" type="button"><img src="img/ch4-marine-drive.jpg" width="896" height="1200" loading="lazy" alt="Pramod and Shruti sitting by the sea at night, holding hands"></button>
+        <div class="chapter-text"><span class="chapter-num">2</span><h3>Where the sea kept time</h3><p>Our first evening together. We talked until the city lights were all that was left.</p></div>
       </li>
-      <li class="chapter chapter-note">
-        <div class="note-card">
-          <div class="chapter-text"><span class="chapter-num">3</span><h3>Dadar Chowpatty</h3><p>Our second date ran three to five hours, and we came home a lot closer. After that we met whenever we could, every week or two.</p></div>
+      <li class="chapter">
+        <!-- PICTURE TO ADD: chapter 3, second date -->
+        <div class="chapter-art placeholder" aria-hidden="true">
+          <svg viewBox="0 0 64 64"><path d="M32 8c6 8 7 14 0 21-7-7-6-13 0-21z" fill="currentColor" opacity=".9"/><path d="M10 34h44c-2 11-11 18-22 18S12 45 10 34z" fill="currentColor" opacity=".55"/><path d="M22 56h20" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".55"/></svg>
         </div>
+        <div class="chapter-text"><span class="chapter-num">3</span><h3>Hours that felt like minutes</h3><p>Somewhere between the sunset and the last goodbye, two strangers became each other's favourite person.</p></div>
       </li>
       <li class="chapter">
         <button class="chapter-art" type="button"><img src="img/ch8-varmala.jpg" width="896" height="1200" loading="lazy" alt="Pramod and Shruti in traditional clothes at a family ceremony"></button>
-        <div class="chapter-text"><span class="chapter-num">4</span><h3>Our tilak ceremony</h3><p>Our families made it official at Shivkamal Lawns, where we held hands and promised each other forever.</p></div>
+        <div class="chapter-text"><span class="chapter-num">4</span><h3>A promise, out loud</h3><p>Hands held, blessings showered, and forever said in front of everyone we love.</p></div>
       </li>
       <li class="chapter">
         <button class="chapter-art" type="button"><img src="img/ch3-monsoon.jpg" width="896" height="1200" loading="lazy" alt="Pramod and Shruti sharing one umbrella in heavy rain"></button>
-        <div class="chapter-text"><span class="chapter-num">5</span><h3>Caught in the rain at Upvan Lake</h3><p>Between shopping trips and café hopping came a scooter ride to Upvan Lake. On the way back from coffee the sky opened up, and we had one umbrella between us.</p></div>
+        <div class="chapter-text"><span class="chapter-num">5</span><h3>One umbrella, two hearts</h3><p>The sky poured, the umbrella was small, and neither of us minded at all.</p></div>
       </li>
       <li class="chapter">
         <button class="chapter-art" type="button"><img src="img/ch1-scooter.jpg" width="896" height="1200" loading="lazy" alt="Pramod and Shruti laughing together on a scooter"></button>
-        <div class="chapter-text"><span class="chapter-num">6</span><h3>Scooter rides became our thing</h3><p>After that rainy ride, the scooter was ours. Every trip on it still feels like a small celebration.</p></div>
+        <div class="chapter-text"><span class="chapter-num">6</span><h3>Ours, on two wheels</h3><p>The wind, the open road, and the two of us. That became our kind of magic.</p></div>
       </li>
       <li class="chapter">
-        <button class="chapter-art" type="button"><img src="img/ch2-chai.jpg" width="896" height="1200" loading="lazy" alt="Pramod and Shruti sharing tea at a roadside stall in the evening"></button>
-        <div class="chapter-text"><span class="chapter-num">7</span><h3>Every single day</h3><p>When Shruti started her new job, Pramod dropped her off on day one on his scooter. Now he picks her up every evening and drops her at the station, with a stop for chai or a snack when we can.</p></div>
+        <button class="chapter-art" type="button"><img src="img/ch2-chai.jpg" width="896" height="1200" loading="lazy" alt="Pramod and Shruti sharing tea together in the evening"></button>
+        <div class="chapter-text"><span class="chapter-num">7</span><h3>Every single day</h3><p>Once in a while became every evening. Some love stories grow quietly, one cup of chai at a time.</p></div>
       </li>
     </ol>
-    <p class="story-end">From every couple of weeks to every single day.<br>Next comes forever, and we'd love you there.</p>
+    <p class="story-end">From a hello to every single day.<br>Next comes forever, and we'd love you there.</p>
   </section>
 
   <!-- Celebrations -->
@@ -635,7 +648,7 @@
   }
   function openLb(i){ lastFocus = document.activeElement; show(i); lb.classList.add('open'); document.body.classList.add('locked'); $('lbClose').focus(); }
   function closeLb(){ lb.classList.remove('open'); document.body.classList.remove('locked'); if (lastFocus) lastFocus.focus(); }
-  document.querySelectorAll('.chapter-art').forEach((b, i) => b.addEventListener('click', () => openLb(i)));
+  document.querySelectorAll('button.chapter-art').forEach((b, i) => b.addEventListener('click', () => openLb(i)));
   $('lbClose').onclick = closeLb; $('lbPrev').onclick = () => show(cur - 1); $('lbNext').onclick = () => show(cur + 1);
   lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
   document.addEventListener('keydown', e => {
