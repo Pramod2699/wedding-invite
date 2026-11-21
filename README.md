@@ -1,26 +1,29 @@
-# Pramod & Shruti — Wedding Invitation 💍
+# Pramod & Shruti — Wedding Invitation
 
-A single-page digital wedding invitation, built to be shared as a link on WhatsApp.
+A digital wedding invitation, built to be shared as a link on WhatsApp.
 
-**Date:** 30th December 2026
-**Venue:** Shivkamal Lawns
+**Live link:** https://pramod2699.github.io/wedding-invite/
 
 ## What's inside
 
-- Animated hero with a live countdown, falling petals and a swaying marigold garland
-- Celebration schedule (Engagement, Haldi, Wedding), all at Shivkamal Lawns
-- Venue card with a Google Maps "Get Directions" button
-- Photo gallery of 9 illustrated romantic scenes, with tap-to-enlarge viewer
+- A sealed envelope that opens with a petal shower when the guest taps the seal
+- Full-screen illustrated hero with a live countdown to 30 December 2026, 5:45 pm
+- "Our story, in scenes": eight illustrated chapters with a swipeable full-screen viewer
+- Schedule (Engagement and Haldi on 29 December, Wedding on 30 December) with Add to calendar links
+- Venue card for Shivkamal Lawns with a Google Maps link
 - RSVP form that opens WhatsApp with the reply pre-filled
+- Link preview image and title for WhatsApp (`og.jpg`)
 
-Everything lives in one self-contained `index.html` (images are embedded), so there is nothing to build.
+## Personal links
 
-## Live link
+Add `?to=` with the guest's name to greet them on the envelope and pre-fill their RSVP:
 
-Once GitHub Pages is enabled (Settings → Pages → Deploy from branch → `main` / root):
+https://pramod2699.github.io/wedding-invite/?to=Rahul%20Kaka
 
-https://pramod2699.github.io/wedding-invite/
+Use `%20` for spaces.
 
 ## Editing
 
-Search `index.html` for `PLACEHOLDER` to find the spots to personalise, such as the RSVP WhatsApp number and countdown date.
+- RSVP WhatsApp number: `RSVP_NUMBER` near the top of the script in `index.html`
+- Scene captions: the `.chapter` blocks in `index.html`
+- Images live in `img/`
