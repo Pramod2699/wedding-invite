@@ -6,13 +6,16 @@ A digital wedding invitation, built to be shared as a link on WhatsApp.
 
 ## What's inside
 
-- Opening screen with Ganesha, श्री गणेशाय नमः and the invitation, then a sealed envelope that opens with a petal shower
-- Full-screen illustrated hero with a live countdown to 30 December 2026, 5:45 pm
-- "Our story" section (currently turned off; commented out in `index.html`)
-- Schedule (Engagement and Haldi on 29 December, Wedding on 30 December) with Add to calendar links
-- Venue card for Shivkamal Lawns with a Google Maps link
-- RSVP form that opens WhatsApp with the reply pre-filled
+1. Opening screen with Ganesha, श्री गणेशाय नमः and the invitation, then a sealed envelope that opens with a petal shower
+2. Hero with the wedding illustration and names
+3. Groom: Pramod Gunaware, son of Shri Baku Gunaware & Smt. Vijaya Gunaware
+4. Bride: Shruti Kaldate and her parents
+5. Save the date: scratch the gold card to reveal 30 December 2026, then a live countdown
+6. 29 December: Engagement (5:00 pm) and Haldi, with Add to calendar
+7. 30 December: Wedding (5:45 pm), with Add to calendar
+8. Venue (Shivkamal Lawns, Google Maps link) and an RSVP form that opens WhatsApp
 - Link preview image and title for WhatsApp (`og.jpg`)
+- "Our story" section is turned off (commented out in `index.html`)
 
 ## Personal links
 
