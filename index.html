@@ -438,6 +438,24 @@
   footer .sign{ font-family:'Fraunces',serif; font-style:italic; font-weight:300; font-size:2rem; line-height:1.2; margin-top:6px; }
   footer p{ color:rgba(244,231,207,.65); margin-top:8px; }
 
+  /* ---------------- Music toggle ---------------- */
+  .music{
+    position:fixed; top:max(14px, env(safe-area-inset-top)); right:14px; z-index:60;
+    width:44px; height:44px; border-radius:50%; display:grid; place-items:center;
+    background:rgba(34,9,15,.85); color:var(--marigold);
+    box-shadow:0 6px 18px rgba(0,0,0,.3), 0 0 0 1px rgba(207,165,76,.5);
+    backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
+    opacity:0; transform:scale(.6); pointer-events:none; transition:opacity .4s ease, transform .4s cubic-bezier(.3,1.4,.5,1);
+  }
+  .revealed .music{ opacity:1; transform:none; pointer-events:auto; }
+  .music .bars{ display:flex; align-items:flex-end; gap:3px; height:16px; }
+  .music .bars i{ display:block; width:3px; height:100%; border-radius:2px; background:currentColor; transform-origin:bottom; animation:eq 1s ease-in-out infinite; }
+  .music .bars i:nth-child(2){ animation-delay:-.3s; } .music .bars i:nth-child(3){ animation-delay:-.6s; } .music .bars i:nth-child(4){ animation-delay:-.15s; }
+  @keyframes eq{ 0%,100%{ transform:scaleY(.3); } 50%{ transform:scaleY(1); } }
+  .music .muted-icon{ display:none; width:20px; height:20px; }
+  .music.off .bars{ display:none; }
+  .music.off .muted-icon{ display:block; }
+
   /* ---------------- Sticky actions ---------------- */
   .dock{
     position:fixed; left:50%; bottom:max(14px, env(safe-area-inset-bottom)); z-index:50;
@@ -840,6 +858,13 @@
   </footer>
 </main>
 
+<!-- Background music: starts when the envelope is opened -->
+<audio id="bgm" src="audio/music.mp3" loop preload="none"></audio>
+<button class="music" id="musicBtn" type="button" aria-label="Pause music" aria-pressed="true">
+  <span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+  <svg class="muted-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/><path d="M3 3l18 18"/></svg>
+</button>
+
 <!-- Quick actions once you scroll past the hero -->
 <nav class="dock" id="dock" aria-label="Quick actions">
   <a id="dockMaps" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Directions</a>
@@ -873,10 +898,44 @@
     $('name').value = guest;
   }
 
+  // ---- Background music ----
+  const bgm = $('bgm'), musicBtn = $('musicBtn');
+  let musicOn = false, wantMusic = true;
+  function fadeTo(target, ms){
+    const from = bgm.volume, t0 = performance.now();
+    (function step(now){
+      const k = Math.min(1, (now - t0) / ms);
+      try { bgm.volume = from + (target - from) * k; } catch(e){}
+      if (k < 1) requestAnimationFrame(step); else if (target === 0) bgm.pause();
+    })(t0);
+  }
+  function setBtn(){
+    musicBtn.classList.toggle('off', !musicOn);
+    musicBtn.setAttribute('aria-pressed', String(musicOn));
+    musicBtn.setAttribute('aria-label', musicOn ? 'Pause music' : 'Play music');
+  }
+  function startMusic(){
+    if (!wantMusic) return;
+    try { bgm.volume = 0; } catch(e){}
+    const pr = bgm.play();
+    musicOn = true; setBtn();
+    if (pr && pr.then) pr.then(() => fadeTo(.7, 2500)).catch(() => { musicOn = false; setBtn(); });
+    else fadeTo(.7, 2500);
+  }
+  musicBtn.addEventListener('click', () => {
+    if (musicOn){ wantMusic = false; musicOn = false; setBtn(); fadeTo(0, 500); }
+    else { wantMusic = true; startMusic(); }
+  });
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden){ if (musicOn) bgm.pause(); }
+    else if (musicOn && wantMusic){ bgm.play().catch(() => {}); }
+  });
+
   // ---- Envelope ----
   const gate = $('gate');
   function openInvite(){
     if (gate.classList.contains('opening')) return;
+    startMusic();
     if (reduce){
       gate.classList.add('gone'); document.body.classList.add('revealed');
       document.body.classList.remove('locked'); setTimeout(() => gate.remove(), 400); return;

@@ -14,6 +14,7 @@ A digital wedding invitation, built to be shared as a link on WhatsApp.
 6. 29 December: Engagement (5:00 pm) and Haldi, with Add to calendar
 7. 30 December: Wedding (5:45 pm), with Add to calendar
 8. Venue (Shivkamal Lawns, Google Maps link) and an RSVP form that opens WhatsApp
+- Background music (`audio/music.mp3`) starts when the envelope is opened, with a pause button top right
 - Link preview image and title for WhatsApp (`og.jpg`)
 - "Our story" section is turned off (commented out in `index.html`)
 
