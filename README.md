@@ -6,7 +6,7 @@ A digital wedding invitation, built to be shared as a link on WhatsApp.
 
 ## What's inside
 
-- A sealed envelope that opens with a petal shower when the guest taps the seal
+- Opening screen with Ganesha, श्री गणेशाय नमः and the invitation, then a sealed envelope that opens with a petal shower
 - Full-screen illustrated hero with a live countdown to 30 December 2026, 5:45 pm
 - "Our story" section (currently turned off; commented out in `index.html`)
 - Schedule (Engagement and Haldi on 29 December, Wedding on 30 December) with Add to calendar links
