@@ -455,6 +455,25 @@
   footer .sign{ font-family:'Fraunces',serif; font-style:italic; font-weight:300; font-size:2rem; line-height:1.2; margin-top:6px; }
   footer p{ color:rgba(244,231,207,.65); margin-top:8px; }
 
+  /* ---------------- Auto-scroll toggle ---------------- */
+  .autoplay{
+    position:fixed; top:max(14px, env(safe-area-inset-top)); right:66px; z-index:60;
+    width:44px; height:44px; border-radius:50%; display:grid; place-items:center;
+    background:rgba(34,9,15,.85); color:var(--marigold);
+    box-shadow:0 6px 18px rgba(0,0,0,.3), 0 0 0 1px rgba(207,165,76,.5);
+    backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
+    opacity:0; transform:scale(.6); pointer-events:none; transition:opacity .4s ease, transform .4s cubic-bezier(.3,1.4,.5,1);
+  }
+  .revealed .autoplay.ready{ opacity:1; transform:none; pointer-events:auto; }
+  .autoplay .ring{ position:absolute; inset:0; width:44px; height:44px; transform:rotate(-90deg); }
+  .autoplay .ring-fill{ stroke-dasharray:119.4; stroke-dashoffset:119.4; }
+  .autoplay.counting .ring-fill{ animation:ringFill var(--dur, 8s) linear forwards; }
+  @keyframes ringFill{ to{ stroke-dashoffset:0; } }
+  .autoplay .icon-pause, .autoplay .icon-play{ width:18px; height:18px; position:relative; }
+  .autoplay .icon-play{ display:none; }
+  .autoplay.off .icon-pause{ display:none; }
+  .autoplay.off .icon-play{ display:block; }
+
   /* ---------------- Music toggle ---------------- */
   .music{
     position:fixed; top:max(14px, env(safe-area-inset-top)); right:14px; z-index:60;
@@ -886,6 +905,13 @@
   </footer>
 </main>
 
+<!-- Auto-scroll through the pages, 8 seconds each -->
+<button class="autoplay" id="autoBtn" type="button" aria-label="Pause auto-scroll" aria-pressed="true">
+  <svg class="ring" viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="19" fill="none" stroke="currentColor" stroke-opacity=".25" stroke-width="2"/><circle class="ring-fill" cx="22" cy="22" r="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+  <svg class="icon-pause" viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="6" width="3.5" height="12" rx="1" fill="currentColor"/><rect x="13.5" y="6" width="3.5" height="12" rx="1" fill="currentColor"/></svg>
+  <svg class="icon-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg>
+</button>
+
 <!-- Background music: starts when the envelope is opened -->
 <audio id="bgm" src="audio/music.mp3" loop preload="none"></audio>
 <button class="music" id="musicBtn" type="button" aria-label="Pause music" aria-pressed="true">
@@ -959,6 +985,68 @@
     else if (musicOn && wantMusic){ bgm.play().catch(() => {}); }
   });
 
+  // ---- Auto-scroll: 8 seconds per page ----
+  const AUTO_MS = 8000;
+  const autoBtn = $('autoBtn');
+  let autoOn = false, autoTimer = null, autoDone = false, programmatic = false;
+  function stops(){
+    const out = [];
+    document.querySelectorAll('.hero, .page, #venue, #rsvp').forEach(s => {
+      const top = Math.round(s.getBoundingClientRect().top + scrollY);
+      out.push({ y: top, el: s });
+      const extra = s.offsetHeight - innerHeight;
+      if (s.id !== 'rsvp' && extra > innerHeight * 0.15) out.push({ y: top + extra, el: s });
+    });
+    return out;
+  }
+  function ring(ms){
+    autoBtn.style.setProperty('--dur', ms + 'ms');
+    autoBtn.classList.remove('counting'); void autoBtn.offsetWidth; autoBtn.classList.add('counting');
+  }
+  function schedule(ms){
+    clearTimeout(autoTimer); ring(ms);
+    autoTimer = setTimeout(step, ms);
+  }
+  function step(){
+    if (!autoOn) return;
+    const here = scrollY;
+    const cur = stops().filter(s => s.y <= here + 10).pop();
+    // Hold on Save the date until it has been revealed
+    const rv = $('reveal');
+    if (cur && cur.el === rv && !rv.classList.contains('scratched')){
+      $('revealSkip').click(); schedule(6000); return;
+    }
+    const next = stops().find(s => s.y > here + 10);
+    if (!next){ stopAuto(true); return; }
+    programmatic = true;
+    scrollTo({ top: next.y, behavior: 'smooth' });
+    setTimeout(() => { programmatic = false; }, 1200);
+    if (next.el.id === 'rsvp'){ stopAuto(true); return; }
+    schedule(AUTO_MS);
+  }
+  function setAutoBtn(){
+    autoBtn.classList.toggle('off', !autoOn);
+    autoBtn.setAttribute('aria-pressed', String(autoOn));
+    autoBtn.setAttribute('aria-label', autoOn ? 'Pause auto-scroll' : 'Resume auto-scroll');
+  }
+  function startAuto(){
+    if (reduce || autoDone) return;
+    autoOn = true; autoBtn.classList.add('ready'); setAutoBtn(); schedule(AUTO_MS);
+  }
+  function stopAuto(finished){
+    autoOn = false; clearTimeout(autoTimer); autoBtn.classList.remove('counting'); setAutoBtn();
+    if (finished){ autoDone = true; autoBtn.classList.remove('ready'); }
+  }
+  autoBtn.addEventListener('click', () => { if (autoOn) stopAuto(false); else { autoDone = false; startAuto(); } });
+  // The guest taking over pauses it (the scratch card and the buttons don't count)
+  const takeOver = e => {
+    if (!autoOn || programmatic) return;
+    const t = e.target;
+    if (t && t.closest && t.closest('#autoBtn, #musicBtn, #scratchCanvas')) return;
+    stopAuto(false);
+  };
+  ['wheel', 'touchstart', 'keydown', 'mousedown'].forEach(ev => addEventListener(ev, takeOver, { passive: true }));
+
   // ---- Envelope ----
   const gate = $('gate');
   function openInvite(){
@@ -976,6 +1064,7 @@
       document.body.classList.add('revealed');
       document.body.classList.remove('locked');
       petals();
+      startAuto();
     }, 1650);
     setTimeout(() => gate.remove(), 2500);
   }

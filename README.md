@@ -16,6 +16,7 @@ A digital wedding invitation, built to be shared as a link on WhatsApp.
 8. 30 December: Wedding (5:45 pm), with Add to calendar
 9. Venue (Shivkamal Lawns, Google Maps link) and an RSVP form that opens WhatsApp
 - Background music (`audio/music.mp3`) starts when the envelope is opened, with a pause button top right
+- Auto-scroll: 8 seconds per page after opening, pauses when the guest touches or scrolls; pause/play button top right
 - Link preview image and title for WhatsApp (`og.jpg`)
 - "Our story" section is turned off (commented out in `index.html`)
 
