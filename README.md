@@ -8,7 +8,7 @@ A digital wedding invitation, built to be shared as a link on WhatsApp.
 
 1. Opening screen with Ganesha, श्री गणेशाय नमः and the invitation, then a sealed envelope that opens with a petal shower
 2. Hero with the wedding illustration and names
-3. Groom: Pramod Gunaware, son of Sau. Vijaya & Shri Balu Gunaware
+3. Groom: Pramod, son of Sau. Vijaya & Shri Balu Gunaware
 4. Bride: Shruti Kaldate, daughter of Sau. Meera & Shri Dhanraj Kaldate
 5. Save the date: scratch the gold card to reveal 30 December 2026, then a live countdown
 6. 29 December: Engagement (5:00 pm), with Add to calendar
