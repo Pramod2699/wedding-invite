@@ -2,7 +2,9 @@
 
 A digital wedding invitation, built to be shared as a link on WhatsApp.
 
-**Live link:** https://pramod2699.github.io/wedding-invite/
+**English:** https://pramod2699.github.io/wedding-invite/
+
+**Marathi:** https://pramod2699.github.io/wedding-invite/mr/
 
 ## What's inside
 
@@ -33,3 +35,11 @@ Use `%20` for spaces.
 
 - Scene captions: the `.chapter` blocks in `index.html`
 - Images live in `img/`
+
+## Marathi version
+
+`mr/index.html` is generated from `index.html`. After changing the English page, rebuild it:
+
+    python3 tools/build_mr.py
+
+The script holds every translation next to the English text it replaces and stops with a message if any English phrase has changed, so the two versions stay in step. Each opening screen links to the other language and keeps the guest's `?to=` name.

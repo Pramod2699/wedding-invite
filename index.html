@@ -102,6 +102,8 @@
     transition:background .2s, opacity .3s;
   }
   .gate-open:hover{ background:var(--sindoor-deep); }
+  .gate-lang{ margin-top:14px; padding:6px 10px; font-size:.95rem; color:var(--muted); text-decoration:underline; text-underline-offset:3px; }
+  .gate.opening .gate-lang{ opacity:0; transition:opacity .3s; }
   .gate.opening .gate-open, .gate.opening .gate-invite, .gate.opening .gate-to{ animation:none; opacity:0; transition:opacity .3s; }
 
   /* gentle arrival of the opening screen */
@@ -692,6 +694,7 @@
       <span class="seal"><span>P&amp;S</span></span>
     </button>
     <button class="gate-open" id="gateOpen" type="button">Open the invitation</button>
+    <a class="gate-lang" id="langLink" href="mr/" lang="mr">मराठीत पाहा</a>
   </div>
 </div>
 
@@ -912,7 +915,12 @@
   const MAPS = "https://maps.app.goo.gl/ERHEYUhH2dHJT6SK7?g_st=ic";
 
   const $ = id => document.getElementById(id);
+  const MR = document.documentElement.lang === 'mr';
+  const num = v => String(v);  // digits stay 0-9 in both languages
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ---- Language link keeps the guest's name ----
+  $('langLink').href = $('langLink').getAttribute('href') + location.search;
 
   // ---- Personal greeting: share links like ...?to=Rahul%20Kaka ----
   const guest = (new URLSearchParams(location.search).get('to') || '').trim().slice(0, 40);
@@ -1070,7 +1078,7 @@
     counting = true;
     (function step(now){
       const t = Math.min(1, (now - start) / dur), e = 1 - Math.pow(1 - t, 3);
-      ids.forEach((id, k) => { const v = Math.round(target[k] * e); $(id).textContent = k ? pad(v) : v; });
+      ids.forEach((id, k) => { const v = Math.round(target[k] * e); $(id).textContent = num(k ? pad(v) : v); });
       if (t < 1) requestAnimationFrame(step); else { counting = false; tick(); }
     })(start);
   }
@@ -1078,10 +1086,10 @@
     if (counting) return;
     const diff = WEDDING - Date.now();
     if (diff <= 0){ $('countdown').style.display = 'none'; $('countdownDone').style.display = 'block'; return; }
-    $('cd-d').textContent = Math.floor(diff / 864e5);
-    $('cd-h').textContent = pad(Math.floor(diff / 36e5) % 24);
-    $('cd-m').textContent = pad(Math.floor(diff / 6e4) % 60);
-    $('cd-s').textContent = pad(Math.floor(diff / 1e3) % 60);
+    $('cd-d').textContent = num(Math.floor(diff / 864e5));
+    $('cd-h').textContent = num(pad(Math.floor(diff / 36e5) % 24));
+    $('cd-m').textContent = num(pad(Math.floor(diff / 6e4) % 60));
+    $('cd-s').textContent = num(pad(Math.floor(diff / 1e3) % 60));
   }
   tick(); setInterval(tick, 1000);
 
@@ -1176,7 +1184,7 @@
   // ---- Hero letters ----
   document.querySelectorAll('.names .word').forEach((w, wi) => {
     const text = w.textContent; w.textContent = '';
-    [...text].forEach((c, i) => { const s = document.createElement('span'); s.className = 'ch'; s.textContent = c; s.style.setProperty('--i', i + wi * 8); w.appendChild(s); });
+    (MR ? [text] : [...text]).forEach((c, i) => { const s = document.createElement('span'); s.className = 'ch'; s.textContent = c; s.style.setProperty('--i', i + wi * 8); w.appendChild(s); });
   });
 
   // ---- Progress thread and hero parallax ----
