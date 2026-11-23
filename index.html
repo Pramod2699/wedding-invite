@@ -1015,13 +1015,21 @@
     if (finished){ autoDone = true; autoBtn.classList.remove('ready'); }
   }
   autoBtn.addEventListener('click', () => { if (autoOn) stopAuto(false); else { autoDone = false; startAuto(); } });
-  // The guest taking over pauses it (the scratch card and the buttons don't count)
+  // The guest taking over pauses it (the scratch card, its link and the buttons don't count)
+  let pausedOnReveal = false;
   const takeOver = e => {
     if (!autoOn || programmatic) return;
     const t = e.target;
-    if (t && t.closest && t.closest('#autoBtn, #musicBtn, #scratchCanvas')) return;
+    if (t && t.closest && t.closest('#autoBtn, #musicBtn, #scratch, #revealSkip')) return;
+    pausedOnReveal = !!(t && t.closest && t.closest('#reveal'));
     stopAuto(false);
   };
+  // Revealing the date (by scratching or the link) keeps the invite moving:
+  // hold on the countdown for a few seconds, then carry on
+  document.addEventListener('date-revealed', () => {
+    if (autoOn){ schedule(6000); return; }
+    if (pausedOnReveal && !autoDone){ pausedOnReveal = false; startAuto(); schedule(6000); }
+  });
   ['wheel', 'touchstart', 'keydown', 'mousedown'].forEach(ev => addEventListener(ev, takeOver, { passive: true }));
 
   // ---- Envelope ----
@@ -1163,6 +1171,7 @@
       canvas.style.opacity = '0';
       setTimeout(() => canvas.remove(), 650);
       section.classList.add('scratched');
+      document.dispatchEvent(new Event('date-revealed'));
       setTimeout(countUp, 350);
       if (!reduce) petals();
     }
