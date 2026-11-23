@@ -14,15 +14,16 @@ A digital wedding invitation, built to be shared as a link on WhatsApp.
 6. 29 December: Engagement (5:00 pm), with Add to calendar
 7. 29 December: Haldi (after the engagement, onwards), with Add to calendar
 8. 30 December: Wedding (5:45 pm), with Add to calendar
-9. Venue (Shivkamal Lawns, Google Maps link) and an RSVP form that opens WhatsApp
+10. Venue (Shivkamal Lawns, Google Maps link)
+11. Closing note from Pramod & Shruti and the Gunaware & Kaldate families
 - Background music (`audio/music.mp3`) starts when the envelope is opened, with a pause button top right
-- Auto-scroll: 8 seconds per page after opening, pauses when the guest touches or scrolls; pause/play button top right
+- Auto-scroll: 8 seconds per page after opening, ends on the closing note, pauses when the guest touches or scrolls; pause/play button top right
 - Link preview image and title for WhatsApp (`og.jpg`)
 - "Our story" section is turned off (commented out in `index.html`)
 
 ## Personal links
 
-Add `?to=` with the guest's name to greet them on the envelope and pre-fill their RSVP:
+Add `?to=` with the guest's name to greet them on the envelope:
 
 https://pramod2699.github.io/wedding-invite/?to=Rahul%20Kaka
 
@@ -30,6 +31,5 @@ Use `%20` for spaces.
 
 ## Editing
 
-- RSVP WhatsApp number: `RSVP_NUMBER` near the top of the script in `index.html`
 - Scene captions: the `.chapter` blocks in `index.html`
 - Images live in `img/`
