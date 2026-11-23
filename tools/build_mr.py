@@ -68,10 +68,10 @@ T = [
 
     # ---- Date reveal ----
     ('id="reveal-h">Save the date</h2>', 'id="reveal-h">शुभदिनांक</h2>', 1),
-    ('Scratch the gold card to reveal it.', 'सोनेरी कार्ड घासून तारीख पाहा.', 1),
+    ('Scratch the gold card to reveal it.', 'सोनेरी कार्ड स्क्रॅच करून तारीख पाहा.', 1),
     ('<span class="sd-dow">Wednesday</span>', '<span class="sd-dow">बुधवार</span>', 1),
     ('<span class="sd-date">30 December</span>', '<span class="sd-date">30 डिसेंबर</span>', 1),
-    ('type="button">Reveal without scratching</button>', 'type="button">न घासता तारीख पाहा</button>', 1),
+    ('type="button">Reveal without scratching</button>', 'type="button">थेट तारीख पाहा</button>', 1),
     ('aria-label="Time until the wedding"', 'aria-label="विवाहासाठी उरलेला वेळ"', 1),
     ('<span class="lbl">days</span>', '<span class="lbl">दिवस</span>', 1),
     ('<span class="lbl">hours</span>', '<span class="lbl">तास</span>', 1),
@@ -130,8 +130,6 @@ T = [
     ('gcal("Pramod & Shruti: Engagement"', 'gcal("प्रमोद व श्रुती: साखरपुडा"', 1),
     ('gcal("Pramod & Shruti: Haldi"', 'gcal("प्रमोद व श्रुती: हळदी समारंभ"', 1),
     ('gcal("Pramod & Shruti: Wedding"', 'gcal("प्रमोद व श्रुती: शुभविवाह"', 1),
-    ("ctx.font = 'italic 500 26px Fraunces, Georgia, serif';", "ctx.font = '26px \"Tiro Devanagari Marathi\", serif';", 1),
-    ("ctx.fillText('Scratch here'", "ctx.fillText('येथे घासा'", 1),
     ("ctx.fillText('to reveal the big day'", "ctx.fillText('शुभदिवस पाहण्यासाठी'", 1),
 ]
 
@@ -153,6 +151,7 @@ MR_CSS = r"""
   html[lang="mr"] .gate-invite{ font-size:1.1rem; line-height:1.75; }
   html[lang="mr"] .closing-msg{ line-height:1.6; }
   html[lang="mr"] .ev-big{ line-height:1.5; }
+  html[lang="mr"] .env-card .names{ font-size:1.12rem; line-height:1.5; white-space:nowrap; }
 """
 
 # Words that must not survive in the visible Marathi page
